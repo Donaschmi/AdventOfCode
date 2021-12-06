@@ -5,7 +5,7 @@ require_once __DIR__ . '/../lib/php/cli.php';
 require_once __DIR__ . '/../lib/php/utils.php';
 require_once __DIR__ . '/../lib/php/runner.php';
 
-foreach (glob(__DIR__ . '/../**/**/code.*') as $codeFile) {
+foreach (glob(__DIR__ . '/../**/**/code.php') as $codeFile) {
     $code = runWithExitCode($codeFile);
 
     if ($code !== CLI_SUCCESS) {
