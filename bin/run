@@ -16,7 +16,7 @@ writeln(
 );
 newLine();
 
-foreach (glob($workingDir . '/code.php') as $codeFile) {
+foreach (glob($workingDir . '/code.*') as $codeFile) {
     if (!empty($exclude) &&
         in_array(pathinfo($codeFile, PATHINFO_EXTENSION), $exclude, true)
     ) {
