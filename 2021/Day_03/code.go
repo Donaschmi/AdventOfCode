@@ -4,6 +4,7 @@ import (
 	"advent-of-code/helper"
 	"fmt"
 	"path"
+	"reflect"
 	"runtime"
 	"time"
 )
@@ -18,29 +19,45 @@ func main() {
 	// Execute
 	start := time.Now()
 	result01 := part01(iValues)
-	//result02 := part02(iValues)
+	result02 := part02(iValues)
 	executionTime := helper.ExecutionTime(time.Since(start))
 
 	fmt.Printf("Solution Part 1: %v\n", result01)
-	//fmt.Printf("Solution Part 2: %v\n", result02)
+	fmt.Printf("Solution Part 2: %v\n", result02)
 	fmt.Printf("Execution time: %s\n", executionTime)
 
 	helper.SaveBenchmarkTime(executionTime, cwd)
 
 	// Testing
-	//helper.TestResults(
-	//	[]helper.TestingValue{
-	//		helper.TestingValue{Result: result01, Expect: nil},
-	//		helper.TestingValue{Result: result02, Expect: nil},
-	//	},
-	//)
+	helper.TestResults(
+		[]helper.TestingValue{
+			helper.TestingValue{Result: result01, Expect: nil},
+			helper.TestingValue{Result: result02, Expect: nil},
+		},
+	)
+}
+
+func parse(s string) (res []interface{}) {
+	res = make([]interface{}, len(s))
+	for i, v := range s {
+		res[i] = string(v)
+	}
+	return
 }
 
 // Task code
-func part01(input []string) {
-
+func part01(input []string) int {
+	rows, cols := len(input), len(input[0])
+	fmt.Println(rows)
+	parsed := helper.Map(input, parse)
+	p := reflect.ValueOf(parsed)
+	for i := 0; i < cols; i++ {
+		test := p.Index(i)
+		fmt.Println(test)
+	}
+	return 0
 }
 
-//func part02(input []string) {
-//
-//}
+func part02(input []string) int {
+	return 0
+}

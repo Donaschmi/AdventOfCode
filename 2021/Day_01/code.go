@@ -30,39 +30,36 @@ func main() {
 	// Testing
 	helper.TestResults(
 		[]helper.TestingValue{
-			helper.TestingValue{Result: result01, Expect: 1713},
-			helper.TestingValue{Result: result02, Expect: 1734},
+			helper.TestingValue{Result: result01, Expect: 1502},
+			helper.TestingValue{Result: result02, Expect: 1538},
 		},
 	)
 }
 
 // Task code
-func part01(input []int) int {
-	count := 0
-
-	for i := 1; i < len(input); i++ {
-		if input[i] > input[i-1] {
-			count++
-		}
-	}
-
-	return count
+func part01(input []int) (count int) {
+  var prev int
+  for i, value := range input {
+    if i == 0 {
+      prev = value
+    } else {
+      if value > prev {
+        count ++
+      }
+      prev = value
+    }
+  }
+  return 
 }
 
-func part02(input []int) int {
-	iLen := len(input)
-	count := 0
-	depth := input[0] + input[1] + input[2]
-
-	for i := 1; i < iLen-2; i++ {
-		cDepth := input[i] + input[i+1] + input[i+2]
-
-		if cDepth > depth {
-			count++
-		}
-
-		depth = cDepth
-	}
-
-	return count
+func part02(input []int) (count int) {
+  for i, value := range input {
+    if i == 0 || i == 1 || i == 2 {
+      continue
+    }
+    if value > input[i-3] {
+      count ++
+    }
+  }
+  return
 }
